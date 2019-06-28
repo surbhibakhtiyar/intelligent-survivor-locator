@@ -1,0 +1,185 @@
+<html>
+  <head>
+            <title> {{ title }}</title>
+            <meta name="viewport" content="width=device-width, height=device-height,initial-scale=1">
+            <!-- Latest compiled and minified CSS -->
+            <link rel="icon" href="{{ url_for('static', filename='img/icon.png' ) }}">
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        
+            <!-- jQuery library -->
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        
+            <!-- Latest compiled JavaScript -->
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+            <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css' ) }}">
+            <link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+
+            <style>
+                    /* Set the size of the div element that contains the map */
+                   #map {
+                     height: 800px;  /* The height is 400 pixels */
+                     width: 75%;  /* The width is the width of the web page */
+                    }
+                 </style>
+        
+        </head>
+        
+        <body >
+
+                <nav class="navbar navbar-inverse">
+                    <div class="container-fluid">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <a class="navbar-brand" href="{{ url_for('index')}}">ISL</a>
+                        </div>
+                        <div class="collapse navbar-collapse" id="myNavbar">
+                            <ul class="nav navbar-nav">
+                                <li class="active">
+                                    <a href="{{ url_for('dashboard') }}"> <span class="glyphicon glyphicon-home"></span> Home</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+                <div class="page-wrap">
+    <div id="map"></div>
+    <!-- Replace the value of the key parameter with your own API key. -->
+    
+ 
+    <footer id="footer" class="container-fluid text-center site-footer">
+        
+        <h6>
+            <img id="github-logo" src="{{ url_for('static', filename='img/GitHub-Mark-Light-32px.png') }}">
+            <a href="https://github.com/ashmitaraju/call-for-code">Source Code</a>
+        <h6>
+    </footer>
+  </body>
+  </html>
+    
+    <script>
+    
+    // The following example creates complex markers to indicate beaches near
+    // Sydney, NSW, Australia. Note that the anchor is set to (0,32) to correspond
+    // to the base of the flagpole.
+    
+    function initMap() {
+      var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 10,
+        center: {lat: 9.655, lng: 76.3375}
+      });
+    
+      setMarkers(map);
+    }
+    
+    // Data for the markers consisting of a name, a LatLng and a zIndex for the
+    // order in which these markers should display on top of each other.
+    var beaches = [
+      ['Karalappathy Sree Bhadrakali Temple Panavally, Kerala 688526 India',9.655,76.3375],
+      ['11th Mile Muttathiparambu Rd, 11th Mile, Mayithara, Cherthala, Kerala 688539, India', 9.781,76.3375],
+      ['Sree Kumaramkode Ganapathykkal Rd, Vayalar, Kerala 688536, India',9.7,76.33840000000002],
+      ['Thycattussery Rd, Thycattussery, Kerala 688541, India', 9.826,76.34020000000002],
+      ['Kunnuparambu Jumua Masjid,Panavally, Kerala 688526 India', 9.745,76.3422],
+      ['Cuppela Lourde Matha Church Mayithara Cherthala, Kerala 688539 India', 9.673,76.3429]
+      
+    ];
+
+    var centres = [[ 'No. of people : 11' , 9.784  ,    76.33996667],
+[ 'No. of people : 10' , 9.676   ,   76.3396    ]];
+    
+    function setMarkers(map) {
+      // Adds markers to the map.
+    
+      // Marker sizes are expressed as a Size of X,Y where the origin of the image
+      // (0,0) is located in the top left of the image.
+    
+      // Origins, anchor positions and coordinates of the marker increase in the X
+      // direction to the right and in the Y direction down.
+      var image = {
+        url: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
+        // This marker is 20 pixels wide by 32 pixels high.
+        size: new google.maps.Size(20, 32),
+        // The origin for this image is (0, 0).
+        origin: new google.maps.Point(0, 0),
+        // The anchor for this image is the base of the flagpole at (0, 32).
+        anchor: new google.maps.Point(0, 32)
+      };
+
+      var image2 = {
+        url: 'https://cdn3.iconfinder.com/data/icons/map-and-location-fill/144/People_Map-512.png',
+        // This marker is 20 pixels wide by 32 pixels high.
+        size: new google.maps.Size(20, 32),
+        // The origin for this image is (0, 0).
+        origin: new google.maps.Point(0, 0),
+        // The anchor for this image is the base of the flagpole at (0, 32).
+        anchor: new google.maps.Point(0, 32)
+      };
+      // Shapes define the clickable region of the icon. The type defines an HTML
+      // <area> element 'poly' which traces out a polygon as a series of X,Y points.
+      // The final coordinate closes the poly by connecting to the first coordinate.
+      var shape = {
+        coords: [1, 1, 1, 20, 18, 20, 18, 1],
+        type: 'poly'
+      };
+      var marker, i;
+      
+      for ( i = 0; i < beaches.length; i++) {
+        var infoWindow = new google.maps.InfoWindow();
+        var beach = beaches[i];
+        
+        marker = new google.maps.Marker({
+          position: {lat: beach[1], lng: beach[2]},
+          map: map,
+          icon: image,
+          shape: shape,
+          title: beach[0]
+        });
+        
+         google.maps.event.addListener(marker, 'click', (function(marker,i ) {
+                return function() {
+                    console.log(beaches[i][0]);
+                    infoWindow.setContent(beaches[i][0]);
+                    infoWindow.open(map, marker);
+                }
+            })(marker, i));
+        
+        }
+
+        for ( i = 0; i < centres.length; i++) {
+        var infoWindow = new google.maps.InfoWindow();
+        var center = centres[i];
+        
+        marker = new google.maps.Marker({
+          position: {lat: center[1], lng: center[2]},
+          map: map,
+          shape: shape,
+          title: center[0]
+        });
+        
+         google.maps.event.addListener(marker, 'click', (function(marker,i ) {
+                return function() {
+                    console.log(centres[i][0]);
+                    infoWindow.setContent(centres[i][0]);
+                    infoWindow.open(map, marker);
+                }
+            })(marker, i));
+        
+        }
+
+        
+    }
+    </script>
+    
+    
+    <!--Load the API from the specified URL
+    * The async attribute allows the browser to render the page while the API loads
+    * The key parameter will contain your own API key (which is not needed for this tutorial)
+    * The callback parameter executes the initMap() function
+    -->
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD17OTqHh1iI6T_8uSGlO_0SXjymIQJGVU&callback=initMap">
+    </script>

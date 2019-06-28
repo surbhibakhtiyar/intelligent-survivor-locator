@@ -1,0 +1,35 @@
+{% extends "base.html" %} {% block body %}
+
+<div class="container-fluid text-center main-body">
+    <div class="row content text-center">
+
+        <div class="col-sm-6 col-sm-offset-3">
+            <div class="well">
+                <img src="https://avatars.io/avatar/HASH/size" class="img-circle" height="65" width="65" alt="Avatar">
+                <h3 class="semi-bold-black">Help Center Admin</h3>
+                <p class="font-lightitalic">@admin</p>
+
+            </div>
+        </div>
+        <div class="col-sm-6 col-sm-offset-3">
+            
+                <a href="{{ url_for('satellite') }}" class="btn btn-info btn-dash"
+                data-toggle="tooltip" title="Check for overall damage of the affected area.">
+                    View Satellite Images </a>
+                <br><br>
+                  
+                <a href="{{ url_for('inventory') }}" class="btn btn-info btn-dash"
+                    data-toggle="tooltip" title="Check the inventory of this Help Centre"> Inventory Management </a>
+
+        </div>
+    </div>
+</div>
+
+<style>
+    .pac-container {
+        padding-bottom: 12px;
+        margin-right: 12px;
+        z-index: 99999 !important;
+    }
+</style>
+{% endblock %}

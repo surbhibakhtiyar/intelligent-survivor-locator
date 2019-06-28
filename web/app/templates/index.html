@@ -1,0 +1,39 @@
+{% extends "base.html" %} {% block body %}
+<div class="container-fluid text-center main-body">
+    <div class="row content">
+        <div class="col-sm-12 text-center welcome">
+            <br><br>
+            <h1> Welcome to ISL!</h1>
+        </div>
+        <div>
+            <a href="{{ url_for('login') }}" class="btn btn-info"> Login </a>
+        </div>
+        <div class="col-sm-12 text-center">
+            <div class="row features-bg">
+                <h2>One Stop Disaster Management System</h2>
+                <div class="col-sm-4 text-center">
+                    <div class="features">
+                        <span class="glyphicon glyphicon-map-marker"></span>
+                        <h3> Satellite Imagery</h3>
+                        <p>Satellite Images are analyzed to assess the damage in an area. </p>
+                    </div>
+                </div>
+                <div class="col-sm-4 text-center">
+                    <div class="features">
+                        <span class="glyphicon glyphicon-plane"></span>
+                        <h3> Drone Surveillence </h3>
+                        <p>Carefully curated music suggestions to help you improve your mood instantly.</p>
+                    </div>
+                </div>
+                <div class="col-sm-4 text-center">
+                    <div class="features">
+                        <span class="glyphicon glyphicon-gift"></span>
+                        <h3> Food and Water Supply</h3>
+                        <p>Supply drones are sent out to locations where people are stuck to provide them with food and water. </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
