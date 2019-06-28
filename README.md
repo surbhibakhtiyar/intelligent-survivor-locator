@@ -7,7 +7,7 @@ Our solution aims at first surveying the area affected by the natural disaster, 
 
 ## Design Flow 
 
-
+![Design](https://github.com/surbhibakhtiyar/intelligent-survivor-locator/blob/master/design-flow(1).png)
 
 ### Instructions to run the code locally
 
